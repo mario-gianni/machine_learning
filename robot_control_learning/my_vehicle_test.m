@@ -3,8 +3,8 @@
 clear all
 close all
 
-addpath(genpath('D:\Work\matlab_code\ebonilla-mtgp-da088e8'))
-addpath(genpath('D:\Work\matlab_code\gpml-matlab'))
+addpath(genpath('D:\Work\LocalProjects\machine_learning\multi_task_learning_gp'));
+addpath(genpath('D:\Work\LocalProjects\machine_learning\gaussian_processes'));
 
  % covariance V (2x2) matrix corresponding to the odometry vector [dx dtheta].
  % V = [0.1 0.01].^2;
@@ -29,7 +29,7 @@ addpath(genpath('D:\Work\matlab_code\gpml-matlab'))
  offset = 5;
  a = -dim;
  b = dim; 
- n_samples = 5;
+ n_samples = 10;
  n_step = 1000;
  
  state = cell(3,n_samples);
