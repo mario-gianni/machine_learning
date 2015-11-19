@@ -65,8 +65,14 @@ Kf = Lf*Lf';
 K = Kf(ind_kf,ind_kf).*Kx(ind_kx,ind_kx);
 K = K + ( Sigma2n(ind_kf,ind_kf) .*Var_nx ); 
 Sigma_noise = MIN_NOISE*eye(n);
-K = K + Sigma_noise;
- 
+%oldK = K + Sigma_noise;
+K = K + Sigma_noise; 
+% [vec,val] = eig(oldK); % Mario
+% val(val<0) = eps;
+% K = vec*val*vec';
+% disp('Current K matrix: ')
+% disp(K);
+
 L = chol(K)';                        % cholesky factorization of the covariance
 alpha = solve_chol(L',y);
 
