@@ -1,4 +1,4 @@
-function [ state,cmd_vel,odom_cov ] = generate_vehicle_data( n_samples,n_step )
+function [ state,cmd_vel,odom_cov ] = generate_vehicle_data( n_samples,n_step, plot)
 
 disp('Data collection');
 
@@ -37,10 +37,13 @@ for i = 1 : n_samples
      v.init(x0);
      % create the driver
      driver = RandomPath(dim + offset);
-     % display(driver)
+     if(plot == 1)
+        display(driver);
+     end
      v.add_driver(driver);  
-     % v.driver.visualize();
-     
+     if(plot == 1)
+        v.driver.visualize();
+     end
      u =  zeros(n_step,2);
      true_xnext = zeros(n_step + 1,3);
      noisy_xnext = zeros(n_step + 1,3);
@@ -50,7 +53,9 @@ for i = 1 : n_samples
      v.x_hist = [v.x_hist; x0'];
      
      for j = 1 : n_step
-        % v.visualize();
+         if (plot == 1)
+            v.visualize();
+         end
         [speed, steer] = v.driver.demand();
         % clip the speed
         u(j,1) = min(v.maxspeed, max(-v.maxspeed, speed));
@@ -65,6 +70,14 @@ for i = 1 : n_samples
         true_xnext(j+1,:) = v.f(v.x', v.odometry);
         v.x_hist = [v.x_hist; v.x'];   % maintain history
         noisy_xnext(j+1,:) = v.f(v.x', v.odometry,v.V);
+        if(plot == 1) 
+            v.plot();
+            drawnow
+        end
+     end
+     if (plot == 1)
+        v.plot_xy();
+        pause(1);
      end
      
      state{1,i} = true_xnext;
