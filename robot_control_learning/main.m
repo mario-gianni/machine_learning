@@ -4,12 +4,12 @@ close all
 addpath(genpath('D:\Work\LocalProjects\machine_learning\multi_task_learning_gp'));
 addpath(genpath('D:\Work\LocalProjects\machine_learning\gaussian_processes'));
 
-n_samples = 10;
+n_samples = 2;
 n_step = 1000;
 
-plot = 0;
+plot_ = 1;
 
-[state,cmd_vel,odom_cov] = generate_vehicle_data(n_samples,n_step,plot);
+[state,cmd_vel,odom_cov] = generate_vehicle_data(n_samples,n_step,plot_);
 
 p = 0.3;
 
@@ -42,3 +42,19 @@ disp('Finished');
 % 
 % plot(nl)
 % title('Negative Marginal log-likelihood');
+
+error_pos = sqrt((Y(:,1) - Ypred(:,1)).^2 + (Y(:,2) - Ypred(:,2)).^2);
+error_orient = abs(Y(:,3) - Ypred(:,3));
+
+plot(Y(:,1),Y(:,2),'ob','MarkerSize', 5);
+grid on
+hold on 
+plot(Ypred(:,1),Ypred(:,2),'+m','MarkerSize', 5);
+hold off
+
+figure
+plot(Y(:,3),'.r')
+gid on
+hold on
+plot(Ypred(:,3),'.m');
+hold off
