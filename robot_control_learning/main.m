@@ -46,6 +46,7 @@ disp('Finished');
 error_pos = sqrt((Y(:,1) - Ypred(:,1)).^2 + (Y(:,2) - Ypred(:,2)).^2);
 error_orient = abs(Y(:,3) - Ypred(:,3));
 
+figure;
 plot(Y(:,1),Y(:,2),'ob','MarkerSize', 5);
 grid on
 hold on 
@@ -54,7 +55,7 @@ hold off
 
 figure
 plot(Y(:,3),'.r')
-gid on
+grid on
 hold on
 plot(Ypred(:,3),'.m');
 hold off
