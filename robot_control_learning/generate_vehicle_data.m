@@ -69,6 +69,7 @@ for i = 1 : n_samples
         v.odometry = odo;
         true_xnext(j+1,:) = v.f(v.x', v.odometry);
         v.x_hist = [v.x_hist; v.x'];   % maintain history
+        %v.x_hist = [v.x_hist; v.f(v.x', v.odometry,v.V)];
         noisy_xnext(j+1,:) = v.f(v.x', v.odometry,v.V);
         if(plot_ == 1) 
             v.plot();

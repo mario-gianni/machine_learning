@@ -14,7 +14,7 @@ function [logtheta_all nl] = learn_mtgp( logtheta_all, deriv_range, data )
 % Edwin V. Bonilla
 
 %% This can be changed: See minimize function for details
-niter     = 1000; % setting for minimize function: number of function evaluations
+niter     = 20; % setting for minimize function: number of function evaluations
 % niter     = 0; % setting for minimize function: number of function evaluations
 
 

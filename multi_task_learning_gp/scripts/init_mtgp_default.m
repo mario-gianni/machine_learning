@@ -24,7 +24,7 @@ logtheta_all  = [theta_lf0; theta_kx0; theta_sigma0];
 
 % assumes that we don't want to optimize the signal variance of kx
 deriv_range = 1 : length(logtheta_all);
-deriv_range(nlf+length(theta_kx0)) = [];
+%deriv_range(nlf+length(theta_kx0)) = [];
 
 
 
