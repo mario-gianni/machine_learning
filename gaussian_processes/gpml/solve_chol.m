@@ -7,19 +7,19 @@
 % contained in the file solve_chol.c, and should be compiled using matlabs mex
 % facility. However, this file also contains a (less efficient) matlab
 % implementation, supplied only as a help to people unfamiliar with mex. If
-% the C code has been properly compiled and is avaiable, it automatically
+% the C code has been properly compiled and is available, it automatically
 % takes precendence over the matlab code in this file.
 %
-% Copyright (c) 2004, 2005, 2006 by Carl Edward Rasmussen. 2006-02-08.
+% Copyright (c) by Carl Edward Rasmussen and Hannes Nickisch 2010-09-18.
 
-function x = solve_chol(A, B);
+function X = solve_chol(L, B)
 
-if nargin ~= 2 | nargout > 1
+if nargin ~= 2 || nargout > 1
   error('Wrong number of arguments.');
 end
 
-if size(A,1) ~= size(A,2) | size(A,1) ~= size(B,1)
+if size(L,1) ~= size(L,2) || size(L,1) ~= size(B,1)
   error('Wrong sizes of matrix arguments.');
 end
 
-x = A\(A'\B);
+X = L\(L'\B);
